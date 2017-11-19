@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login">Identifiant</string>
+    <string name="password_label">Mot de passe</string>
+    <string name="ok">OK</string>
+    <string name="login_button">Se connecter</string>
+    <string name="choose_flight">Choisir ce vol</string>
+    <string name="fail">ECHEC</string>
+    <string name="language">Langue</string>
+    <string name="done">J\'ai fini</string>
+</resources>
