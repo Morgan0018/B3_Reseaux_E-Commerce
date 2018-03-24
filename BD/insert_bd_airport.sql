@@ -1,0 +1,152 @@
+USE DB_Airport;
+
+INSERT INTO Employer (Name, Certificate) VALUES
+('InPrES Airport', 'InPrESAir'),
+('Bon Voyage Tour-Operateur', 'BonVoyTO'),
+('Web Application', 'WebApp');
+
+INSERT INTO Agents (Login, Password, WorksFor) VALUES
+('Test', 'PwdTest', 1),
+('Morgan', 'MonMdp', 2);
+
+INSERT INTO Planes (Check_OK, NbSeats) VALUES
+(TRUE, 300),
+(TRUE, 450),
+(FALSE, 180),
+(TRUE, 450);
+
+INSERT INTO Airlines (Id) VALUES
+('POWDER-AIRLINES'),
+('WALABIES-AIRLINES'),
+('AIR FRANCE CANAILLE');
+
+INSERT INTO Zones (Id) VALUES
+('EUR'), 
+('AM-N'), 
+('AM-S'), 
+('AS'), 
+('AFR-N'), 
+('AFR-SUBSAH'), 
+('AUST'), 
+('OCEA');
+
+INSERT INTO Destination (Id, Distance, RefZone) VALUES
+('Peshawar', 7000, 'AS'),
+('Sydney', 16500, 'AUST'),
+('Paris', 350, 'EUR');
+
+INSERT INTO Flights (Id, RefDestination, RefAirline, DepartureDate, DepartureTime, ETA, RefPlane) VALUES
+(362, 'Peshawar', 'POWDER-AIRLINES', '2017-8-22', '6h30', '12h15', 1),
+(714, 'Sydney', 'WALABIES-AIRLINES', '2017-8-22', '5h30', '19h45', 4),
+(152, 'Paris', 'AIR FRANCE CANAILLE', '2017-8-22', '7h20', '9h40', 2),
+(363, 'Peshawar', 'POWDER-AIRLINES', '2017-9-22', '6h30', '12h15', 1),
+(715, 'Sydney', 'WALABIES-AIRLINES', '2017-9-22', '5h30', '19h45', 4),
+(153, 'Paris', 'AIR FRANCE CANAILLE', '2017-9-22', '7h20', '9h40', 2),
+(361, 'Peshawar', 'POWDER-AIRLINES', '2016-9-22', '6h30', '12h15', 1),
+(713, 'Sydney', 'WALABIES-AIRLINES', '2016-9-22', '5h30', '19h45', 4),
+(151, 'Paris', 'AIR FRANCE CANAILLE', '2016-9-22', '7h20', '9h40', 2);
+
+#DROP PROCEDURE IF EXISTS add_flights;
+DELIMITER #
+CREATE PROCEDURE add_flights()
+BEGIN
+	DECLARE startDate DATE DEFAULT curdate();
+    DECLARE dDate DATE;
+    DECLARE i INT(3) DEFAULT 0;
+    DECLARE parisId INT(3) DEFAULT 160;
+    DECLARE peshawarId INT(3) DEFAULT 340;
+    DECLARE sydneyId INT(3) DEFAULT 720;
+    START TRANSACTION;
+	REPEAT
+		SET dDate = date_add(startDate, INTERVAL i DAY);
+		INSERT INTO flights (Id, RefDestination, RefAirline, DepartureDate, DepartureTime, ETA, RefPlane) VALUES
+        (parisId, 'Paris', 'AIR FRANCE CANAILLE', dDate, '7h20', '9h40', 2);
+        SET parisId = parisId + 1;
+        IF (i % 2 = 0) THEN
+			INSERT INTO flights (Id, RefDestination, RefAirline, DepartureDate, DepartureTime, ETA, RefPlane) VALUES
+			(peshawarId, 'Peshawar', 'POWDER-AIRLINES', dDate, '6h30', '12h15', 1);
+            SET peshawarId = peshawarId + 1;
+        END IF;
+        IF (i % 3 = 0) THEN
+			INSERT INTO flights (Id, RefDestination, RefAirline, DepartureDate, DepartureTime, ETA, RefPlane) VALUES
+			(sydneyId, 'Sydney', 'WALABIES-AIRLINES', dDate, '5h30', '19h45', 4);
+            SET sydneyId = sydneyId + 1;
+        END IF;
+        SET i = i + 1;
+        UNTIL i > 30
+	END REPEAT;
+    COMMIT;
+END #
+
+DELIMITER ;
+
+CALL add_flights();
+
+INSERT INTO Passengers (LastName, FirstName, NumId, Age, Gender) VALUES
+('CHARVILROM', 'Walter', 'EM623015', 52, 'M'),
+('DREZE', 'Morgan', 'EM704569', 30, 'F'),
+('DUPOND', 'Avec un D', 'EF856214', 44, 'M'),
+('DUPONT', 'Avec un T', 'EF857489', 44, 'M');
+
+INSERT INTO Clients (Login, Password, RefPassenger) VALUES
+('Test', 'PwdTest', 'MODREZE');
+
+INSERT INTO Tickets (Id, RefPassenger, RefFlight, Paid) VALUES
+('362-22082017-0070', 'WACHARVILROM', 362, TRUE),
+('362-22082017-0071', 'WACHARVILROM', 362, TRUE),
+('362-22082017-0072', 'WACHARVILROM', 362, TRUE),
+('362-22082017-0073', 'WACHARVILROM', 362, TRUE),
+('362-22082017-0074', 'WACHARVILROM', 362, TRUE),
+('362-22082017-0075', 'WACHARVILROM', 362, TRUE),
+('362-22082017-0076', 'WACHARVILROM', 362, TRUE),
+('362-22082017-0077', 'WACHARVILROM', 362, TRUE),
+('362-22082017-0078', 'WACHARVILROM', 362, TRUE),
+('362-22082017-0079', 'WACHARVILROM', 362, TRUE),
+('362-22082017-0080', 'WACHARVILROM', 362, TRUE),
+('362-22082017-0081', 'MODREZE', 362, TRUE),
+('362-22082017-0082', 'MODREZE', 362, TRUE),
+('714-22082017-0040', 'AVDUPOND', 714, TRUE),
+('714-22082017-0050', 'AVDUPONT', 714, TRUE);
+
+INSERT INTO Tickets (RefPassenger, RefFlight, Paid) VALUES
+('MODREZE', 153, TRUE),
+('MODREZE', 153, TRUE),
+('AVDUPOND', 715, TRUE),
+('AVDUPONT', 715, TRUE),
+('MODREZE', 151, TRUE),
+('MODREZE', 151, TRUE),
+('AVDUPOND', 713, TRUE),
+('AVDUPONT', 713, TRUE);
+
+INSERT INTO Luggages (Id, Suitcase, Weight, RefTicket) VALUES
+('362-WACHARVILROM-22082017-0070-001', TRUE, 27.3, '362-22082017-0070'),
+('362-WACHARVILROM-22082017-0070-002', TRUE, 18.9, '362-22082017-0070'),
+('362-WACHARVILROM-22082017-0070-003', TRUE, 22.1, '362-22082017-0070'),
+('362-WACHARVILROM-22082017-0070-004', FALSE, 19.95, '362-22082017-0070'),
+('362-WACHARVILROM-22082017-0070-005', FALSE, 19.9, '362-22082017-0070'),
+('362-WACHARVILROM-22082017-0070-006', FALSE, 19.95, '362-22082017-0070'),
+('362-WACHARVILROM-22082017-0070-007', FALSE, 18.95, '362-22082017-0070'),
+('362-WACHARVILROM-22082017-0070-008', FALSE, 19.5, '362-22082017-0070'),
+('362-MODREZE-22082017-0081-001', TRUE, 19.8, '362-22082017-0081'),
+('362-MODREZE-22082017-0081-002', TRUE, 18.6, '362-22082017-0081'),
+('714-AVDUPOND-22082017-0040-001', TRUE, 15.4, '714-22082017-0040'),
+('714-AVDUPOND-22082017-0040-002', FALSE, 5.8, '714-22082017-0040'),
+('714-AVDUPONT-22082017-0050-001', TRUE, 16.1, '714-22082017-0050'),
+('714-AVDUPONT-22082017-0050-002', FALSE, 3.2, '714-22082017-0050');
+
+INSERT INTO Luggages (Suitcase, Weight, RefTicket) VALUES
+(TRUE, 19.5, '151-22092016-001'),
+(TRUE, 18.5, '151-22092016-001'),
+(TRUE, 20.2, '153-22092017-001'),
+(TRUE, 19.8, '153-22092017-001'),
+(TRUE, 19.7, '713-22092016-001'),
+(FALSE, 15.9, '713-22092016-001'),
+(TRUE, 17.6, '713-22092016-002'),
+(TRUE, 19.5, '715-22092017-001'),
+(FALSE, 18.3, '715-22092017-001'),
+(TRUE, 18.8, '715-22092017-002'),
+(FALSE, 22.1, '715-22092017-002');
+
+INSERT INTO Languages (Id, Name) VALUES
+('FR', 'Français'),
+('EN', 'English');

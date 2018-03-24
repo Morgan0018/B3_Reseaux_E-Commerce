@@ -1,0 +1,61 @@
+mode;molecule;coeficient
+voie orale;AlphaGrosseTete;10
+voie orale;AlphaGrosseTete;12
+voie orale;AlphaGrosseTete;8
+voie orale;AlphaGrosseTete;10
+voie orale;AlphaGrosseTete;6
+voie orale;AlphaGrosseTete;13
+voie orale;AlphaGrosseTete;9
+voie orale;AlphaGrosseTete;10
+voie orale;AlphaGrosseTete;9
+voie orale;AlphaGrosseTete;8
+voie orale;BetaCuisseJupiter;7
+voie orale;BetaCuisseJupiter;14
+voie orale;BetaCuisseJupiter;10
+voie orale;BetaCuisseJupiter;11
+voie orale;BetaCuisseJupiter;9
+voie orale;BetaCuisseJupiter;10
+voie orale;BetaCuisseJupiter;11
+voie orale;BetaCuisseJupiter;7
+voie orale;BetaCuisseJupiter;9
+voie orale;BetaCuisseJupiter;9
+voie orale;GammaGrosCou;12
+voie orale;GammaGrosCou;9
+voie orale;GammaGrosCou;11
+voie orale;GammaGrosCou;27
+voie orale;GammaGrosCou;7
+voie orale;GammaGrosCou;8
+voie orale;GammaGrosCou;13
+voie orale;GammaGrosCou;14
+voie orale;GammaGrosCou;10
+voie orale;GammaGrosCou;11
+injection;AlphaGrosseTete;11
+injection;AlphaGrosseTete;18
+injection;AlphaGrosseTete;12
+injection;AlphaGrosseTete;15
+injection;AlphaGrosseTete;13
+injection;AlphaGrosseTete;8
+injection;AlphaGrosseTete;15
+injection;AlphaGrosseTete;16
+injection;AlphaGrosseTete;9
+injection;AlphaGrosseTete;13
+injection;BetaCuisseJupiter;8
+injection;BetaCuisseJupiter;9
+injection;BetaCuisseJupiter;10
+injection;BetaCuisseJupiter;9
+injection;BetaCuisseJupiter;11
+injection;BetaCuisseJupiter;13
+injection;BetaCuisseJupiter;7
+injection;BetaCuisseJupiter;14
+injection;BetaCuisseJupiter;15
+injection;BetaCuisseJupiter;12
+injection;GammaGrosCou;7
+injection;GammaGrosCou;6
+injection;GammaGrosCou;10
+injection;GammaGrosCou;7
+injection;GammaGrosCou;7
+injection;GammaGrosCou;5
+injection;GammaGrosCou;6
+injection;GammaGrosCou;7
+injection;GammaGrosCou;9
+injection;GammaGrosCou;6
